@@ -4,12 +4,21 @@ resources:
   source: 
     uri: https://github.com/ansot/testRepo
     branch: master
+- name: pcf-resource
+  type: cf
+  source:
+    api: {{cf-api}}
+    username: {{repo-username}}
+    password: {{repo-password}}
+    organization: {{cf-org}}
+    space: {{cf-space}}
+    skip_cert_check: false
 jobs:
 - name: build-and-verify
   plan:
   - get: source-code
     trigger: true
-  - task: build-and-verify
+  - task:  build-and-verify
     file: source-code/tasks/build.yml
     params:
       M2_SETTINGS_REPO_ID : {{repo-id}}
@@ -17,3 +26,6 @@ jobs:
       M2_SETTINGS_REPO_PASSWORD : {{repo-password}}
       M2_SETTINGS_REPO_RELEASE_URI : {{repo-release-uri}}
       M2_SETTINGS_REPO_SNAPSHOT_URI : {{repo-snapshot-uri}}
+  - put: pcf-resource
+      params:
+      manifest: ./source-code/manifest.yml
