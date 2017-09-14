@@ -21,12 +21,12 @@ jobs:
     trigger: true
   - task: build-and-verify
     file: source-code/tasks/build.yml
-  - put: deployed-app
     params:
-      manifest: source-code/manifest.yml
-      path: source-output/*.jar
       M2_SETTINGS_REPO_ID : {{repo-id}}
       M2_SETTINGS_REPO_USERNAME : {{repo-username}}
       M2_SETTINGS_REPO_PASSWORD : {{repo-password}}
       M2_SETTINGS_REPO_RELEASE_URI : {{repo-release-uri}}
       M2_SETTINGS_REPO_SNAPSHOT_URI : {{repo-snapshot-uri}}
+  - put: pcf-resource
+      manifest: source-code/manifest.yml
+      path: source-output/*.jar
