@@ -28,5 +28,6 @@ jobs:
       M2_SETTINGS_REPO_RELEASE_URI : {{repo-release-uri}}
       M2_SETTINGS_REPO_SNAPSHOT_URI : {{repo-snapshot-uri}}
   - put: pcf-resource
-      manifest: source-code/manifest.yml
+    params:
+      manifest: ./manifest.yml
       path: source-output/*.jar
