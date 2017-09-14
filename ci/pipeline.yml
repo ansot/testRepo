@@ -27,3 +27,9 @@ jobs:
             echo "Calling Maven ..."
             cd source-code
             mvn verify
+        params:
+          M2_SETTINGS_REPO_ID : {{repo-id}}
+          M2_SETTINGS_REPO_USERNAME : {{repo-username}}
+          M2_SETTINGS_REPO_PASSWORD : {{repo-password}}
+          M2_SETTINGS_REPO_RELEASE_URI : {{repo-release-uri}}
+          M2_SETTINGS_REPO_SNAPSHOT_URI : {{repo-snapshot-uri}}
