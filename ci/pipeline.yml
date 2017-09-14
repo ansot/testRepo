@@ -10,26 +10,10 @@ jobs:
   - get: source-code
     trigger: true
   - task: build-and-verify
-    config:
-      platform: linux
-      image_resource:
-        type: docker-image
-        source:
-          repository: maven
-          tag: 3.3.9-jdk-8
-      inputs:
-        - name: source-code
-      run:
-        path: sh
-        args:
-          - -c
-          - |
-            echo "Calling Maven ..."
-            cd source-code
-            mvn verify
-        params:
-          M2_SETTINGS_REPO_ID : {{repo-id}}
-          M2_SETTINGS_REPO_USERNAME : {{repo-username}}
-          M2_SETTINGS_REPO_PASSWORD : {{repo-password}}
-          M2_SETTINGS_REPO_RELEASE_URI : {{repo-release-uri}}
-          M2_SETTINGS_REPO_SNAPSHOT_URI : {{repo-snapshot-uri}}
+    file: source-code/tasks/build.yml
+    params:
+      M2_SETTINGS_REPO_ID : {{repo-id}}
+      M2_SETTINGS_REPO_USERNAME : {{repo-username}}
+      M2_SETTINGS_REPO_PASSWORD : {{repo-password}}
+      M2_SETTINGS_REPO_RELEASE_URI : {{repo-release-uri}}
+      M2_SETTINGS_REPO_SNAPSHOT_URI : {{repo-snapshot-uri}}
